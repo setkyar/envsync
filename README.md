@@ -71,6 +71,14 @@ For team collaboration, follow these steps:
 
 1. **IAM Permissions**: Ensure team members have the necessary IAM permissions (refer to the policy mentioned above).
 2. **Key Sharing**: Share the public and private keys located in `$HOME/.envsync/` with your team.
+   - You can use the following command to create `public/private` key pair and configure `config.yaml`
+    ```
+    ssh-keygen -t rsa -b 2048 -f private_key.pem && mv private_key.pem.pub public_key.pem && ssh-keygen -p -m PEM -f private_key.pem
+    ```
+   - If you are going to the route of generating your own `public/pirivate` key par. You will have to run the command like the following
+	```
+    envsync push --config=config.yaml --name=yourprojectname
+    ```
 3. **Team Setup**: Team members should run `envsync init` and configure their environment. They have two options:
 
    - **Using Shared Keys**: Replace their `private_key.pem` and `public_key.pem` files with the shared keys and simply run:
@@ -95,4 +103,4 @@ For team collaboration, follow these steps:
      ```sh
      envsync pull --name=yourprojectname --config=yourconfig.yaml
      ```
-    This approach allows team members to either share keys or use individual configurations, providing flexibility in managing access and security.
+  This approach allows team members to either share keys or use individual configurations, providing flexibility in managing access and security. 
