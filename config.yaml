@@ -1,0 +1,8 @@
+aws:
+  region: ap-southeast-1
+  s3_bucket: your-s3-bucket
+  access_key_id: your-aws-access-key
+  secret_access_key: your-aws-secret-key
+envsync:
+  private_key: ~/.envsync/private_key.pem
+  public_key: ~/.envsync/public_key.pem
