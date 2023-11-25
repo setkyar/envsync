@@ -6,6 +6,8 @@ Sync your environment files securely with public/private key encryption via AWS 
 
 `envsync` is a CLI tool designed to securely synchronize your `.env` files across different machines. It uses public/private key encryption for security and AWS S3 for storage.
 
+![Diagram](diagram.png)
+
 ## Commands
 
 - `init`: Initialize your `envsync`. This command sets up public/private keys and configures AWS S3.
