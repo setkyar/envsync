@@ -47,60 +47,51 @@ Run `envsync init` and input the AWS configuration when prompted. This will set 
 
 ### Usage
 
-- **Pushing `.env` File**:
+**Pushing `.env` File**:
 
-  To push the `.env` file from your current directory to S3, run:
+To push the `.env` file from your current directory to S3, run:
 
-  ```sh
-  envsync push --name=yourprojectname
-  ```
+```sh
+envsync push --name=your_project_name
+```
 
-  This command encrypts your `.env` file and stores it at `your-s3-bucket/yourprojectname/.env` in S3.
+This command encrypts your `.env` file and stores it at `your-s3-bucket/your_project_name/.env` in S3.
 
-- **Pulling `.env` File**:
+**Pulling `.env` File**:
 
-  To pull the `.env` file from S3, run:
+To pull the `.env` file from S3, run:
 
-  ```sh
-  envsync pull --name=yourprojectname
-  ```
+```sh
+envsync pull --name=your_project_name
+```
 
 ### Collaborating with Team Members
 
 For team collaboration, follow these steps:
 
-1. **IAM Permissions**: Ensure team members have the necessary IAM permissions (refer to the policy mentioned above).
-2. **Key Sharing**: Share the public and private keys located in `$HOME/.envsync/` with your team.
-   - You can use the following command to create `public/private` key pair and configure `config.yaml`
-    ```
-    ssh-keygen -t rsa -b 2048 -f private_key.pem && mv private_key.pem.pub public_key.pem && ssh-keygen -p -m PEM -f private_key.pem
-    ```
-   - If you are going to the route of generating your own `public/pirivate` key par. You will have to run the command like the following
-	```
-    envsync push --config=config.yaml --name=yourprojectname
-    ```
-3. **Team Setup**: Team members should run `envsync init` and configure their environment. They have two options:
+1. **IAM Permissions**: 
+Ensure team members have the necessary IAM permissions (refer to the policy mentioned above).
 
-   - **Using Shared Keys**: Replace their `private_key.pem` and `public_key.pem` files with the shared keys and simply run:
+2. **Key Sharing**: 
+Share the public and private keys located in `$HOME/.envsync/` with your team or you create your own `public/private` key pair and configure to use via your own `config.yaml` file and share with the team. You can create your own key pair using the following command...
+```
+ssh-keygen -t rsa -b 2048 -f private_key.pem && mv private_key.pem.pub public_key.pem && ssh-keygen -p -m PEM -f private_key.pem
+```
 
-     ```sh
-     envsync pull --name=yourprojectname
-     ```
+3. **Team Setup**: Get `private_key.pem` and `public_key.pem` and configure your `config.yaml` like the following.
 
-   - **Using a Configuration File**: Create their own configuration file and run:
+```yaml
+aws:
+  region: ap-southeast-1
+  s3_bucket: your-s3-bucket
+  access_key_id: your-aws-access-key
+  secret_access_key: your-aws-secret-key
+envsync:
+  private_key: ~/.envsync/private_key.pem # Replace with private_key path
+  public_key: ~/.envsync/public_key.pem   # Replace with public_key path
+```
 
-     ```yaml
-     aws:
-       region: ap-southeast-1
-       s3_bucket: your-s3-bucket
-       access_key_id: your-aws-access-key
-       secret_access_key: your-aws-secret-key
-     envsync:
-       private_key: ~/.envsync/private_key.pem
-       public_key: ~/.envsync/public_key.pem
-     ```
-
-     ```sh
-     envsync pull --name=yourprojectname --config=yourconfig.yaml
-     ```
-  This approach allows team members to either share keys or use individual configurations, providing flexibility in managing access and security. 
+And run pull or pull like the following
+```sh
+envsync pull --name=your_project_name --config=config.yaml
+```
