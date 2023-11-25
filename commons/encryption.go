@@ -67,8 +67,9 @@ func GenerateRSAKeys() error {
 
 	return nil
 }
-func EncryptFileWithPrivateKey(filePath string) (string, error) {
+func EncryptFileWithPublicKey(filePath string) (string, error) {
 	privateKeyPath := viper.GetString("envsync.private_key")
+	fmt.Println(privateKeyPath)
 
 	privateKeyBytes, err := os.ReadFile(privateKeyPath)
 	if err != nil {

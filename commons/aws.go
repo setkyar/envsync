@@ -27,7 +27,7 @@ func UploadToS3(envName, filePath string) error {
 		return fmt.Errorf("failed to create AWS session: %w", err)
 	}
 
-	encryptedFilePath, err := EncryptFileWithPrivateKey(filePath)
+	encryptedFilePath, err := EncryptFileWithPublicKey(filePath)
 	if err != nil {
 		return fmt.Errorf("failed to encrypt file: %w", err)
 	}
