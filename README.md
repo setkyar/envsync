@@ -95,5 +95,3 @@ For team collaboration, follow these steps:
      ```sh
      envsync pull --name=yourprojectname --config=yourconfig.yaml
      ```
-
-This approach allows team members to either share keys or use individual configurations, providing flexibility in managing access and security.
